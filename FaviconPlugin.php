@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name:       Page Specific Favicons
- * Plugin URI:        https://github.com/jcjason12108-alt/wp-page-specific-favicons/
+ * Plugin URI:        https://github.com/jcjason12108-alt/Page-Specific-Favicons/
  * Description:       Add a different favicon to each post or page.
  * Version:           1.0.6
  * Author:            Jason Cox
@@ -9,7 +9,7 @@
  * Tested up to:      6.8.1
  * Requires PHP:      7.4
  * License:           Proprietary
- * Text Domain:       wp-page-specific-favicons
+ * Text Domain:       page-specific-favicons
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -24,9 +24,9 @@ function page_specific_favicons_init_update_checker() {
     }
 
     $update_checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
-        'https://github.com/jcjason12108-alt/wp-page-specific-favicons/',
+        'https://github.com/jcjason12108-alt/Page-Specific-Favicons/',
         __FILE__,
-        'wp-page-specific-favicons'
+        'page-specific-favicons'
     );
     $update_checker->setBranch( 'main' );
 
