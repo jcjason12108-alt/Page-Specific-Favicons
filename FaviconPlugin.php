@@ -3,7 +3,7 @@
  * Plugin Name:       Page Specific Favicons
  * Plugin URI:        https://github.com/jcjason12108-alt/Page-Specific-Favicons/
  * Description:       Add a different favicon to each post or page.
- * Version:           1.0.6
+ * Version:           1.0.7
  * Author:            Jason Cox
  * Requires at least: 6.0
  * Tested up to:      6.8.1

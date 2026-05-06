@@ -4,7 +4,7 @@ Tags: favicon, page icon, post icon, site icon, upload favicon
 Requires at least: 6.0
 Tested up to: 6.8.1
 Requires PHP: 7.4
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: Proprietary
 
 Add a unique favicon to any post or page in WordPress. Falls back to your site-wide favicon if none is set.
@@ -50,12 +50,15 @@ Includes a preview of the selected icon and an easy "Remove" button.
 
 == Security / Notes ==
 
-* Version: 1.0.6
+* Version: 1.0.7
 * The save handler validates a nonce, prevents autosave/revision writes, and checks the current user's `edit_post` capability before updating post meta.
 * Saved URLs are sanitized with `esc_url_raw()` and URL schemes are limited to `http`, `https`, and `data`.
 * Admin preview is created via safe DOM methods to avoid raw HTML injection.
 
 == Changelog ==
+
+= 1.0.7 =
+* Bump version for GitHub updater testing.
 
 = 1.0.6 =
 * Initialize Plugin Update Checker after WordPress finishes loading plugins to avoid activation-time fatal errors.
