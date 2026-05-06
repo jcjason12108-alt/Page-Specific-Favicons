@@ -3,7 +3,7 @@
  * Plugin Name:       Page Specific Favicons
  * Plugin URI:        https://github.com/jcjason12108-alt/wp-page-specific-favicons/
  * Description:       Add a different favicon to each post or page.
- * Version:           1.0.5
+ * Version:           1.0.6
  * Author:            Jason Cox
  * Requires at least: 6.0
  * Tested up to:      6.8.1
@@ -16,28 +16,37 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 require_once __DIR__ . '/plugin-update-checker/plugin-update-checker.php';
 
-$page_specific_favicons_update_checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
-    'https://github.com/jcjason12108-alt/wp-page-specific-favicons/',
-    __FILE__,
-    'wp-page-specific-favicons'
-);
-$page_specific_favicons_update_checker->setBranch( 'main' );
+add_action( 'plugins_loaded', 'page_specific_favicons_init_update_checker' );
 
-$page_specific_favicons_github_token = defined( 'PLUGIN_UPDATE_GITHUB_TOKEN' )
-    ? PLUGIN_UPDATE_GITHUB_TOKEN
-    : getenv( 'PLUGIN_UPDATE_GITHUB_TOKEN' );
+function page_specific_favicons_init_update_checker() {
+    if ( ! class_exists( '\YahnisElsts\PluginUpdateChecker\v5\PucFactory' ) ) {
+        return;
+    }
 
-if ( ! empty( $page_specific_favicons_github_token ) ) {
-    $page_specific_favicons_update_checker->setAuthentication( $page_specific_favicons_github_token );
+    $update_checker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
+        'https://github.com/jcjason12108-alt/wp-page-specific-favicons/',
+        __FILE__,
+        'wp-page-specific-favicons'
+    );
+    $update_checker->setBranch( 'main' );
+
+    $github_token = defined( 'PLUGIN_UPDATE_GITHUB_TOKEN' )
+        ? PLUGIN_UPDATE_GITHUB_TOKEN
+        : getenv( 'PLUGIN_UPDATE_GITHUB_TOKEN' );
+
+    if ( ! empty( $github_token ) ) {
+        $update_checker->setAuthentication( $github_token );
+    }
+
+    add_filter(
+        $update_checker->getUniqueName( 'vcs_update_detection_strategies' ),
+        static function ( array $strategies ): array {
+            return isset( $strategies['branch'] ) ? array( 'branch' => $strategies['branch'] ) : $strategies;
+        }
+    );
 }
 
-add_filter(
-    $page_specific_favicons_update_checker->getUniqueName( 'vcs_update_detection_strategies' ),
-    static function ( array $strategies ): array {
-        return isset( $strategies['branch'] ) ? array( 'branch' => $strategies['branch'] ) : $strategies;
-    }
-);
-
+if ( ! class_exists( 'Multi_Favicons' ) ) {
 class Multi_Favicons {
 
     public function __construct() {
@@ -175,3 +184,4 @@ class Multi_Favicons {
 }
 
 new Multi_Favicons();
+}

@@ -10,7 +10,7 @@ Tested up to: 6.8.1
 
 Requires PHP: 7.4
 
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 
 License: Proprietary
 
@@ -57,12 +57,16 @@ Includes a preview of the selected icon and an easy "Remove" button.
 
 == Security / Notes ==
 
-- Version: 1.0.5
+- Version: 1.0.6
 - The save handler validates a nonce, prevents autosave/revision writes, and checks the current user's `edit_post` capability before updating post meta.
 - Saved URLs are sanitized with `esc_url_raw()` and URL schemes are limited to `http`, `https`, and `data`.
 - Admin preview is created via safe DOM methods to avoid raw HTML injection.
 
 == Changelog ==
+
+= 1.0.6 =
+* Initialize Plugin Update Checker after WordPress finishes loading plugins to avoid activation-time fatal errors.
+* Guard the plugin class declaration so installing beside an older copy does not trigger a duplicate class fatal error.
 
 = 1.0.5 =
 * Add Plugin Update Checker for automatic updates from the GitHub `main` branch.
