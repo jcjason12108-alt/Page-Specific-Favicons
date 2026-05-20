@@ -3,10 +3,10 @@
  * Plugin Name:       Page Specific Favicons
  * Plugin URI:        https://github.com/jcjason12108-alt/Page-Specific-Favicons/
  * Description:       Add a different favicon to each post or page.
- * Version:           1.0.7
+ * Version:           1.0.8
  * Author:            Jason Cox
  * Requires at least: 6.0
- * Tested up to:      6.8.1
+ * Tested up to:      7.0
  * Requires PHP:      7.4
  * License:           Proprietary
  * Text Domain:       page-specific-favicons
@@ -114,7 +114,7 @@ class Multi_Favicons {
     public function save_favicon_meta( $post_id ) {
         if (
             ! isset( $_POST['multi_favicon_nonce_field'] ) ||
-            ! wp_verify_nonce( $_POST['multi_favicon_nonce_field'], 'multi_favicon_nonce' )
+            ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['multi_favicon_nonce_field'] ) ), 'multi_favicon_nonce' )
         ) {
             return;
         }
@@ -177,7 +177,7 @@ class Multi_Favicons {
     }
 
     public function enqueue_admin_scripts( $hook ) {
-        if ( in_array( $hook, [ 'post.php', 'post-new.php' ] ) ) {
+        if ( in_array( $hook, [ 'post.php', 'post-new.php' ], true ) ) {
             wp_enqueue_media();
         }
     }
