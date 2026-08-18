@@ -10,7 +10,7 @@ Tested up to: 7.0
 
 Requires PHP: 7.4
 
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 
 License: Proprietary
 
@@ -57,12 +57,15 @@ Includes a preview of the selected icon and an easy "Remove" button.
 
 == Security / Notes ==
 
-- Version: 1.0.8
+- Version: 1.0.9
 - The save handler validates a nonce, prevents autosave/revision writes, and checks the current user's `edit_post` capability before updating post meta.
 - Saved URLs are sanitized with `esc_url_raw()` and URL schemes are limited to `http`, `https`, and `data`.
 - Admin preview is created via safe DOM methods to avoid raw HTML injection.
 
 == Changelog ==
+
+= 1.0.9 =
+* Updated the bundled Plugin Update Checker library from 5.6 to 5.7.
 
 = 1.0.8 =
 * Confirm compatibility with WordPress 7.0 and harden nonce handling during favicon meta saves.
